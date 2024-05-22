@@ -12,6 +12,7 @@ class Homeworks extends Model
         'id_user',
         'homework',
         'status',
+        'details',
     ];
 
 }

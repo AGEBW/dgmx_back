@@ -15,6 +15,7 @@ return new class extends Migration
             $table->increments('id');
             $table->integer('id_user');
             $table->string('homework');
+            $table->longText('details')->nullable();
             $table->integer('status')->default(0);
             $table->timestamps();
 

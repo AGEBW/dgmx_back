@@ -24,4 +24,5 @@ Route::middleware('api')->group(function () {
 Route::get('/datos', [Controller::class,'index'])->name('datos');
 
 Route::post('/delete', [Controller::class,'delete'])->name('delete');
+Route::post('/update', [Controller::class,'create_u'])->name('update');
 });

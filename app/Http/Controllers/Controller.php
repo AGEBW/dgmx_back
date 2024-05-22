@@ -17,12 +17,13 @@ class Controller extends BaseController
 
     //funcion obtener datos
     public function index(Request $r){
-        $a=(new Filters)->filterU($r);
-        return $a;
+        $u=(new Filters)->filterU($r);
+        return response()->json(['status'=>200,'response'=>$u]);
     }
 
     //funcion crear/ actualizar tareas
     public function create_u(Request $r){
+
         DB::beginTransaction();
         try{
             $h= $r->id?Homeworks::find($r->id):new Homeworks;
@@ -30,7 +31,8 @@ class Controller extends BaseController
             $h->fill([
                 'id_user'=>$r->id_user,
                 'homework'=>$r->homework,
-                'status'=>$r->status
+                'details'=>$r->details,
+                'status'=>$r->status?$r->status:0,
                 ])->save();
          DB::commit();
          return response()->json(['status'=>200,'response'=>$h]);
