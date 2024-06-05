@@ -11,10 +11,9 @@ class Filters
 
     public function filterU(Request $r){
         $h=(new User)->newQuery();
-        $stand_by=0;
         !$r->name?:$h->where('name','like','%'.$r->name.'%');
 
-        $h= $h->select('id','name','email')->get();
+        $h= $h->select('id','name','email','password')->get();
 
         $h=$h->map(function($hh){
             $hh->homew;

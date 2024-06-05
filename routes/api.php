@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
@@ -22,7 +23,16 @@ use App\Http\Controllers\Controller;
 Route::middleware('api')->group(function () {
 
 Route::get('/datos', [Controller::class,'index'])->name('datos');
-
 Route::post('/delete', [Controller::class,'delete'])->name('delete');
 Route::post('/update', [Controller::class,'create_u'])->name('update');
+
+Route::post('/deleteU', [Controller::class,'delete_u'])->name('delete');
+});
+
+
+Route::post('login', [AuthController::class, 'login']);
+Route::post('register', [AuthController::class, 'register']);
+
+Route::middleware('auth:api')->group(function () {
+    Route::get('user', [AuthController::class, 'getUser']);
 });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Class\Filters\Filters;
 use App\Models\Homeworks;
+use App\Models\User;
 use Error;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -45,6 +46,16 @@ class Controller extends BaseController
     public function delete(Request $r){
         try{
             $h= Homeworks::find($r->id);
+            $h->delete();
+            return response()->json(['status'=>200,'response'=>'Done!']);
+        }catch(Error $e){
+            return response()->json(['status'=>500,'response'=>$e]);
+        }
+    }
+
+    public function delete_u(Request $r){
+        try{
+            $h= User::find($r->id);
             $h->delete();
             return response()->json(['status'=>200,'response'=>'Done!']);
         }catch(Error $e){
