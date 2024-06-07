@@ -41,15 +41,15 @@ class AuthController extends Controller
         }
     }
 
-    public function login(Request $request)
+    public function login(Request $r)
     {
-        $credentials = $request->only('email', 'password');
+        $credentials = $r->only('email', 'password');
 
         if (!$token = Auth::attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-
-        return response()->json(['token' => $token]);
+        $user=User::where('email',$r->email)->first();
+        return response()->json(['token' => $token,'user'=>$user]);
     }
 
     public function getUser(Request $request)
